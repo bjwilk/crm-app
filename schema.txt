@@ -1,0 +1,17 @@
+Users
+    firstName
+    lastName
+    email
+    password
+    position
+    userId
+
+Accounts
+    companyName
+    businessType
+    fleetSize
+    equipmentType
+    lookingFor
+    lastPurchased
+    userId
+    acctId

@@ -6,11 +6,15 @@ class Accounts extends Model {}
 
 Accounts.init({
   // Model attributes are defined here
+  companyName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   businessType: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  lastfleetSizeName: {
+  fleetSize: {
     type: DataTypes.STRING
     // allowNull defaults to true
   },
