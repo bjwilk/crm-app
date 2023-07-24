@@ -1,0 +1,17 @@
+user table
+    firstName
+    lastName
+    email
+    password
+    occupation
+    userId
+
+accounts
+    businessType
+    fleetSize
+    equipmentType
+    lookingFor
+    lastPurchased
+    acctId
+    userId
+    
