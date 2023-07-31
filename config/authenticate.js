@@ -1,12 +1,12 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('./models/user');
+const User = require('../models/Users');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 require('dotenv').config()
 
-const config = require('./config.js');
+const config = require('./passportConfig');
 
 exports.local = passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -25,7 +25,7 @@ exports.jwtPassport = passport.use(
         opts,
         (jwt_payload, done) => {
             console.log('JWT payload:', jwt_payload);
-            User.findOne({_id: jwt_payload._id}, (err, user) => {
+            User.findOne({id: jwt_payload.id}, (err, user) => {
                 if (err) {
                     return done(err, false);
                 } else if (user) {

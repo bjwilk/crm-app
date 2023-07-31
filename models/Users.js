@@ -1,11 +1,21 @@
 const sequelize = require('../config/config.js')
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes, Model, Sequelize } = require('sequelize');
+passportLocalSequelize = require('passport-local-sequelize');
 
 
-class Users extends Model {}
+class User extends Model { }
 
-Users.init({
+User.init({
   // Model attributes are defined here
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  userName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false
@@ -25,13 +35,22 @@ Users.init({
   position: {
     type: DataTypes.STRING
   },
-  userId: {
+  hashField: {
+    type: DataTypes.STRING
+  },
+  saltField: {
     type: DataTypes.STRING
   }
 }, {
   // Other model options go here
   sequelize, // We need to pass the connection instance
-  modelName: 'Users' // We need to choose the model name
+  modelName: 'User' // We need to choose the model name
 });
 
-module.exports = Users;
+passportLocalSequelize.attachToUser(User, {
+	userName: 'nick',
+	hashField: 'myhash',
+	saltField: 'mysalt'
+});
+
+module.exports = User;
