@@ -4,8 +4,6 @@ const User = require('./Users')
 
 User.hasOne(Account, {
     foreignKey: {
-        // a `UserId` is the default foreign key that is also created
-        name: 'myUserId'
     }
 })
 Account.belongsTo(User)

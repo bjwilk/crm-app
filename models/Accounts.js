@@ -4,40 +4,45 @@ const { DataTypes, Model } = require('sequelize');
 
 class Account extends Model { }
 
-Account.init({
-  // Model attributes are defined here
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
+Account.init(
+  {
+    // Model attributes are defined here
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    companyName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    businessType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    fleetSize: {
+      type: DataTypes.ARRAY(DataTypes.STRING), // Use ARRAY for array types
+      allowNull: true, // allowNull defaults to true, so you can omit this line
+    },
+    equipmentType: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+    },
+    lookingFor: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+    },
+    lastPurchased: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
-  companyName: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  businessType: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  fleetSize: {
-    type: DataTypes.STRING
-    // allowNull defaults to true
-  },
-  equipmentType: {
-    type: DataTypes.STRING
+  {
+    sequelize, // Associate the model with your Sequelize instance
+    modelName: 'Account', // Set the model name
+    // Other options and hooks can be added here
+  }
+);
 
-  },
-  lookingFor: {
-    type: DataTypes.STRING
-  },
-  lastPurchased: {
-    type: DataTypes.DATE,
-    allowNull: true
-  },
-}, {
-  // Other model options go here
-  sequelize, // We need to pass the connection instance
-  modelName: 'Account' // We need to choose the model name
-});
-
+// Export the model
 module.exports = Account;
