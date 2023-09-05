@@ -9,7 +9,7 @@ User.hasOne(Account, {
 Account.belongsTo(User)
 
 const syncTable = async () => {
-    await sequelize.sync();
+    await sequelize.sync({force: false});
     console.log("Tables Synched!!")
 }
 

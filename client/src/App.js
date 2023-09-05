@@ -7,6 +7,7 @@ import DashBoard from "./components/DashBoard";
 import Footer from "./components/Footer";
 import Signup from "./components/Signup";
 import styled from "styled-components";
+import Accounts from "./components/Accounts";
 
 const Tabs = styled.button`
   border: solid black 5px;
@@ -24,11 +25,21 @@ const Container = styled.div`
 `;
 
 function App() {
+  const handleLogout = () => {
+    fetch("http://localhost:3002/users/logout").then(() => {
+      localStorage.removeItem("jsonwebtoken");
+      window.alert("Logged out");
+      window.location.reload();
+    });
+  };
   return (
     <div className="App">
       <BrowserRouter>
         <Container>
         <Tabs>
+            <Link to="/Accounts">Accounts</Link>
+          </Tabs>
+          <Tabs>
             <Link to="/DashBoard">DashBoard</Link>
           </Tabs>
           <Tabs>
@@ -37,13 +48,18 @@ function App() {
           <Tabs>
             <Link to="/Signup">Signup</Link>
           </Tabs>
+          <Tabs>
+            <button onClick={handleLogout}>Logout</button>
+          </Tabs>
         </Container>
         <Fragment>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<DashBoard />} />
+            <Route path="/DashBoard" element={<DashBoard />} />
             <Route path="/Login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/Accounts" element={<Accounts />} />
+
           </Routes>
         </Fragment>
       </BrowserRouter>

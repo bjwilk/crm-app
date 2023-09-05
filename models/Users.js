@@ -18,18 +18,20 @@ User.init({
   },
   firstName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   lastName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   email: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
     // allowNull defaults to true
   },
   password: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
 
   },
   position: {

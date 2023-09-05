@@ -5,22 +5,22 @@ import { Link, useNavigate } from "react-router-dom";
 // useNavigate - react-router-dom
 
 function Login() {
-  const [userName, setUserName] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(userName, password);
+    console.log(email, password);
     const newUser = {
-      username: userName,
+      email: email,
       password: password,
     };
-    const response = await fetch("/users/login", {
+    const response = await fetch("http://localhost:3002/users/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("jsonwebtoken")}`,
+        // Authorization: `Bearer ${localStorage.getItem("jsonwebtoken")}`,
       },
       body: JSON.stringify(newUser),
     });
@@ -37,7 +37,7 @@ function Login() {
 
   const handleChange = (e) => {
     if (e.target.name === "user") {
-      setUserName(e.target.value);
+      setemail(e.target.value);
     } else {
       setPassword(e.target.value);
     }
@@ -75,9 +75,9 @@ function Login() {
         >
           <input
             type="text"
-            value={userName}
+            value={email}
             name="user"
-            placeholder="username"
+            placeholder="email"
             onChange={handleChange}
           />
           <br />

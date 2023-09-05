@@ -21,14 +21,13 @@ function SignUp() {
     console.log(email, userName, password);
     const newUser = {
       email: email,
-      username: userName,
+      userName: userName,
       password: password,
     };
-    const response = await fetch("http://localhost:3001/users/SignUp", {
+    const response = await fetch("http://localhost:3002/users/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("jsonwebtoken")}`,
       },
       body: JSON.stringify(newUser),
     });

@@ -46,9 +46,9 @@ accountRouter
       Account.create({
         companyName,
         businessType,
-        fleetSize: [fleetSize],
-        equipmentType: [equipmentType],
-        lookingFor: [lookingFor],
+        fleetSize: fleetSize,
+        equipmentType: equipmentType,
+        lookingFor: lookingFor,
         lastPurchased: new Date(lastPurchased)
       }).then((response) => {
         res.json(response)
