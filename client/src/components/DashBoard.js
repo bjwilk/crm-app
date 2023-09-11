@@ -67,7 +67,7 @@ const DashBoard = () => {
     // formData.append("lookingFor", lookingFor.toLowerCase());
     // formData.append("equipmentType", equipmentType);
     
-
+console.log(newAccount)
    
 
     const response = await fetch("http://localhost:3002/accounts", {
@@ -84,9 +84,9 @@ const DashBoard = () => {
       console.log("data", data);
       setCompanyName("");
       setBusinessType("");
-      setFleetSize("");
+      setFleetSize(0);
       setLookingFor("");
-      setEquipmentType(0);
+      setEquipmentType("");
       setLastPurchased("");
       window.alert("Account added successfully!");
     } else {

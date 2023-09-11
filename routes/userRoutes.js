@@ -43,17 +43,19 @@ router.post("/signup", (req, res) => {
         password: hash,
         position,
       }).then((response) => {
-        sendMail(
-          email,
-          "verify email",
-          "please confirm in email",
-          `
-                <h3>UserName: ${userName}</h3>
-                <p>Confirm Email with link</p>
-                <a href='http://192.168.4.23:3000'>Click Here</a>
-                `
-        );
-        res.json({ user: "user saved" });
+        // sendMail(
+        //   email,
+        //   "verify email",
+        //   "please confirm in email",
+        //   `
+        //         <h3>UserName: ${userName}</h3>
+        //         <p>Confirm Email with link</p>
+        //         <a href='http://192.168.4.23:3000'>Click Here</a>
+        //         `
+        // );
+        let token = jwt.sign({ id: response.id }, process.env.JSON_SECRET);
+            res.json({ jwt: token });
+        // res.json({ user: "user saved" });
       });
     } else {
       res.status(400).json({ error: "Erros has occured" });
@@ -68,8 +70,8 @@ router.post("/signin", (req, res) => {
   console.log("request for body: ", req.body);
   User.findOne({where:{ email: email} })
     .then((user) => {
-      console.log(user);
-      if (user) {
+      console.log("USER HERE", user);
+      if (user !== null) {
         bcrypt.compare(password, user.password).then(function (result) {
           // result == true
           if (result) {
@@ -77,6 +79,7 @@ router.post("/signin", (req, res) => {
             res.json({ jwt: token });
           }
         });
+        // res.json(user)
       } else {
         res.json({ err: "Error occured" });
       }
@@ -86,7 +89,7 @@ router.post("/signin", (req, res) => {
     });
 });
 
-router.get("/logout", cors.corsWithOptions, (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   if (req.session) {
     req.session.destroy();
     res.clearCookie("session-id");
@@ -94,7 +97,7 @@ router.get("/logout", cors.corsWithOptions, (req, res, next) => {
   } else {
     const err = new Error("You are not logged in!");
     err.status = 401;
-    return next(err);
+    return next();
   }
 });
 

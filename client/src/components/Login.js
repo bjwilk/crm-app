@@ -25,8 +25,8 @@ function Login() {
       body: JSON.stringify(newUser),
     });
     const result = await response.json();
-    console.log(result);
-    if (result) {
+    console.log("RESULT HERE", result);
+    if (result.jwt) {
       localStorage.setItem("jsonwebtoken", result.jwt);
       window.alert("Successful login!");
       navigate("/");

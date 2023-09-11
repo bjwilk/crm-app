@@ -28,8 +28,10 @@ accountRouter.route("/search").get((req, res) => {
 
 accountRouter
   .route("/")
-  .get((req, res, next) => {
-    Account.findAll()
+  .get(authenticate.authenticateToken, (req, res, next) => {
+    Account.findAll({where: {
+      id: req.user.id
+    }})
       .then((accounts) => {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");

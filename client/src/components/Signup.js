@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // import { useHistory } from 'react-router';
 // useNavigate - react-router-dom
@@ -15,6 +16,7 @@ function SignUp() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,10 +36,10 @@ function SignUp() {
     const result = await response.json();
     console.log(result);
     localStorage.setItem("jsonwebtoken", result.jwt);
-  
+  navigate('/Dashboard')
     // Show success message if signup was successful
     if (response.ok) {
-      alert("Signup success! Please login to continue"); // Display the alert message
+      alert("Signup success! "); // Display the alert message
     }
   };
   

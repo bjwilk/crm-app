@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import dayjs from "dayjs"
+import dayjs from "dayjs";
+// import { local } from "../../../config/authenticate";
 
 export default function Accounts() {
   const [account, setAccount] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem("jsonwebtoken"))
+  // const [token, setToken] = useState(localStorage.getItem("jsonwebtoken") ? localStorage.getItem("jsonwebtoken") : "");
 
   const fetchAccounts = async () => {
     try {
       const response = await fetch("http://localhost:3002/accounts", {
         method: "GET",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("jsonwebtoken")}`
+        }
       });
       if (!response.ok) {
         throw new Error("Failed to fetch data");
@@ -20,21 +24,31 @@ export default function Accounts() {
       console.error("Error fetching data:", error);
     }
   };
-  
 
   useEffect(() => {
-    
     fetchAccounts();
   }, []);
 
-  return <div>
-    {token ? account.length > 0 && account.map((item) => 
-      (<div key={item._id}>
-      <p>
-        {item.companyName} {item.businessType} {item.fleetSize} {item.equipmentType} {item.lookingFor} {dayjs(item.lastPurchased).format('MMMM D, YYYY')}
-      </p>
-    </div>)
-    ) : <div>Please log in</div>}
-   
-  </div>;
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          width: "25%",
+          border: "solid black",
+          boxSizing: "border-box",
+          padding: "10px",
+        }}
+      >
+        <div>
+          <h4>Accounts</h4>
+          { account.length > 0 &&
+            account.map((item) => <div key={item._id}>{item.companyName}</div>)}
+        </div>
+      </div>
+    </div>
+  );
+  
 }
+

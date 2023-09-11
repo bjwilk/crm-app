@@ -1,10 +1,8 @@
 import "./App.css";
 import React, { Fragment } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
 import Login from "./components/Login";
 import DashBoard from "./components/DashBoard";
-import Footer from "./components/Footer";
 import Signup from "./components/Signup";
 import styled from "styled-components";
 import Accounts from "./components/Accounts";
