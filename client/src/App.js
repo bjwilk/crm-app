@@ -6,6 +6,7 @@ import DashBoard from "./components/DashBoard";
 import Signup from "./components/Signup";
 import styled from "styled-components";
 import Accounts from "./components/Accounts";
+import AccountProfile from "./components/AccountProfile";
 
 const Tabs = styled.button`
   border: solid black 5px;
@@ -57,6 +58,7 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/Accounts" element={<Accounts />} />
+            <Route path="/AccountProfile/:id" element={<AccountProfile />} />
 
           </Routes>
         </Fragment>

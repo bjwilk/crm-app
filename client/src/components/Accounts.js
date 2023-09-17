@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom'
 import dayjs from "dayjs";
+
+// Now you can use the `Account` model to create, query, and manipulate data.
+
 // import { local } from "../../../config/authenticate";
 
 export default function Accounts() {
@@ -44,7 +48,7 @@ export default function Accounts() {
         <div>
           <h4>Accounts</h4>
           { account.length > 0 &&
-            account.map((item) => <div key={item._id}>{item.companyName}</div>)}
+            account.map((item) => <div key={item.id}><Link to={`/AccountProfile/${item.id}`}>{item.companyName}</Link></div>)}
         </div>
       </div>
     </div>

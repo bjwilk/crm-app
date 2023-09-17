@@ -30,7 +30,7 @@ accountRouter
   .route("/")
   .get(authenticate.authenticateToken, (req, res, next) => {
     Account.findAll({where: {
-      id: req.user.id
+      userId: req.user.id
     }})
       .then((accounts) => {
         res.statusCode = 200;
@@ -74,9 +74,9 @@ accountRouter
   });
 
 accountRouter
-  .route("/:accountId")
+  .route("/company/:accountId")
   .get((req, res, next) => {
-    Account.findById(req.params.accountId)
+    Account.findByPk( req.params.accountId)
       .then((account) => {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");

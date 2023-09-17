@@ -39,6 +39,14 @@ Account.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    }
   },
   {
     sequelize, // Associate the model with your Sequelize instance
