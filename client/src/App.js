@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Fragment } from "react";
+import React, { Fragment, createContext, useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import DashBoard from "./components/DashBoard";
@@ -7,6 +7,8 @@ import Signup from "./components/Signup";
 import styled from "styled-components";
 import Accounts from "./components/Accounts";
 import AccountProfile from "./components/AccountProfile";
+
+export const AccountContext = createContext()
 
 const Tabs = styled.button`
   border: solid black 5px;
@@ -24,6 +26,7 @@ const Container = styled.div`
 `;
 
 function App() {
+  const [accounts, setAccounts] = useState([])
   const handleLogout = () => {
     fetch("http://localhost:3002/users/logout").then(() => {
       localStorage.removeItem("jsonwebtoken");
@@ -33,6 +36,7 @@ function App() {
   };
   return (
     <div className="App">
+      <AccountContext.Provider value={[accounts, setAccounts]}>
       <BrowserRouter>
         <Container>
         <Tabs>
@@ -63,6 +67,7 @@ function App() {
           </Routes>
         </Fragment>
       </BrowserRouter>
+      </AccountContext.Provider>
     </div>
   );
 }

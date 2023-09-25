@@ -110,4 +110,37 @@ accountRouter
       .catch((err) => next(err));
   });
 
+  accountRouter
+  .route("/equipmentType")
+  .get(authenticate.authenticateToken, (req, res) => {
+    Account.findAll({
+      attributes:["id","equipmentType"]
+    })
+      .then((equipment) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(equipment);
+      })
+      .catch((err) => next(err));
+  });
+
+  accountRouter
+  .route("/equipmentType/:equipment")
+  .get(authenticate.authenticateToken, (req, res) => {
+    const {equipment} = req.params
+    Account.findAll({
+      where:{
+        equipmentType: equipment
+      }
+    })
+      .then((equipment) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(equipment);
+      })
+      .catch((err) => next(err));
+  });
+
+
+
 module.exports = accountRouter;

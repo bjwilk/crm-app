@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import FilterAccounts from "./FilterAccounts";
+import { AccountContext } from "../App";
 
 // Now you can use the `Account` model to create, query, and manipulate data.
 
 // import { local } from "../../../config/authenticate";
 
 export default function Accounts() {
-  const [account, setAccount] = useState([]);
+  // const [account, setAccount] = useState([]);
+  const [account, setAccount] = useContext(AccountContext)
   // const [token, setToken] = useState(localStorage.getItem("jsonwebtoken") ? localStorage.getItem("jsonwebtoken") : "");
 
   const fetchAccounts = async () => {
@@ -15,8 +18,8 @@ export default function Accounts() {
       const response = await fetch("http://localhost:3002/accounts", {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("jsonwebtoken")}`
-        }
+          Authorization: `Bearer ${localStorage.getItem("jsonwebtoken")}`,
+        },
       });
       if (!response.ok) {
         throw new Error("Failed to fetch data");
@@ -34,7 +37,7 @@ export default function Accounts() {
   }, []);
 
   return (
-    <div>
+    <div className="d-flex">
       <div
         style={{
           display: "flex",
@@ -47,12 +50,17 @@ export default function Accounts() {
       >
         <div>
           <h4>Accounts</h4>
-          { account.length > 0 &&
-            account.map((item) => <div key={item.id}><Link to={`/AccountProfile/${item.id}`}>{item.companyName}</Link></div>)}
+          {account.length > 0 &&
+            account.map((item) => (
+              <div key={item.id}>
+                <Link to={`/AccountProfile/${item.id}`}>
+                  {item.companyName}
+                </Link>
+              </div>
+            ))}
         </div>
       </div>
+      {account.length > 0 && <FilterAccounts dataEquipment={account}/>}
     </div>
   );
-  
 }
-
