@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Profile from "./test";
 
 export const Wrapper = styled.div`
   border: solid black 10px;
@@ -49,117 +50,117 @@ const DashBoard = () => {
   const [lookingFor, setLookingFor] = useState("");
   const [equipmentType, setEquipmentType] = useState("");
 
-  const handleDashBoard = async () => {
-    const newAccount = {
-      companyName,
-      businessType,
-      fleetSize,
-      lookingFor,
-      lastPurchased,
-      equipmentType,
-    };
+  const [addressInfo, setAddressInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    address2: "",
+    city: "",
+    zipCode: "",
+  });
 
-    // const formData = new FormData();
-    // formData.append("companyName", companyName);
-    // formData.append("businessType", businessType.toUpperCase());
-    // formData.append("fleetSize", fleetSize.toUpperCase());
-    // formData.append("lastPurchased", lastPurchased);
-    // formData.append("lookingFor", lookingFor.toLowerCase());
-    // formData.append("equipmentType", equipmentType);
-    
-console.log(newAccount)
-   
-
-    const response = await fetch("http://localhost:3002/accounts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("jsonwebtoken")}`,
-      },
-      body: JSON.stringify(newAccount),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("data", data);
-      setCompanyName("");
-      setBusinessType("");
-      setFleetSize(0);
-      setLookingFor("");
-      setEquipmentType("");
-      setLastPurchased("");
-      window.alert("Account added successfully!");
-    } else {
-      window.alert("Something went wrong");
-
-      // Handle error response
-      throw new Error("Failed to add account");
+  const handleChange = (e) => {
+    switch (e.target.name) {
+      case "firstName":
+        setAddressInfo({ ...addressInfo, firstName: e.target.value });
+        break;
+      case "lastName":
+        setAddressInfo({ ...addressInfo, lastName: e.target.value });
+        break;
+      case "email":
+        setAddressInfo({ ...addressInfo, email: e.target.value });
+        break;
+      case "phoneNumber":
+        setAddressInfo({ ...addressInfo, phoneNumber: e.target.value });
+        break;
+      case "address":
+        setAddressInfo({ ...addressInfo, address: e.target.value });
+        break;
+      case "address2":
+        setAddressInfo({ ...addressInfo, address2: e.target.value });
+        break;
+      case "city":
+        setAddressInfo({ ...addressInfo, city: e.target.value });
+        break;
+      case "zipCode":
+        setAddressInfo({ ...addressInfo, zipCode: e.target.value });
+        break;
+      default:
+        break;
     }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+
+//   const handleDashBoard = async () => {
+//     const newAccount = {
+//       companyName,
+//       businessType,
+//       fleetSize,
+//       lookingFor,
+//       lastPurchased,
+//       equipmentType,
+//     };
+
+//     const formData = new FormData();
+//     formData.append("companyName", companyName);
+//     formData.append("businessType", businessType.toUpperCase());
+//     formData.append("fleetSize", fleetSize.toUpperCase());
+//     formData.append("lastPurchased", lastPurchased);
+//     formData.append("lookingFor", lookingFor.toLowerCase());
+//     formData.append("equipmentType", equipmentType);
+    
+// console.log(newAccount)
+   
+
+//     const response = await fetch("http://localhost:3002/accounts", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         authorization: `Bearer ${localStorage.getItem("jsonwebtoken")}`,
+//       },
+//       body: JSON.stringify(newAccount),
+//     });
+
+//     if (response.ok) {
+//       const data = await response.json();
+//       console.log("data", data);
+//       setCompanyName("");
+//       setBusinessType("");
+//       setFleetSize(0);
+//       setLookingFor("");
+//       setEquipmentType("");
+//       setLastPurchased("");
+//       window.alert("Account added successfully!");
+//     } else {
+//       window.alert("Something went wrong");
+
+//       // Handle error response
+//       throw new Error("Failed to add account");
+//     }
+//   };
 
  
 
   return (
     <>
-      <InputWrapper>
-        <div>
-          <P>Company Name</P>
-          <input
-            type="text"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
-            placeholder="Enter Info"
+       <Profile
+            handleSubmit={handleSubmit}
+            firstName={addressInfo.firstName}
+            handleChange={handleChange}
+            lastName={addressInfo.lastName}
+            email={addressInfo.email}
+            phoneNumber={addressInfo.phoneNumber}
+            address={addressInfo.address}
+            address2={addressInfo.address2}
+            city={addressInfo.city}
+            zipCode={addressInfo.zipCode}
           />
-        </div>
-        <div>
-          <P>Business Type</P>
-          <input
-            type="text"
-            value={businessType}
-            onChange={(e) => setBusinessType(e.target.value)}
-            placeholder="Enter Info"
-          />
-        </div>
-        <div>
-          <P>Fleet Size</P>
-          <input
-            type="number"
-            value={fleetSize}
-            onChange={(e) => setFleetSize(e.target.value)}
-            placeholder="Enter Info"
-          />
-        </div>
-        <div>
-          <div>
-            <P>Equipment Type</P>
-            <input
-              type="text"
-              value={equipmentType}
-              onChange={(e) => setEquipmentType(e.target.value)}
-              placeholder="Enter Info"
-            />
-          </div>
-
-          <P>Looking For</P>
-          <input
-            type="text"
-            value={lookingFor}
-            onChange={(e) => setLookingFor(e.target.value)}
-            placeholder="Enter Info"
-          />
-        </div>
-        <div>
-          <P>Last Purchased</P>
-          <input
-            type="date"
-            value={lastPurchased}
-            onChange={(e) => setLastPurchased(e.target.value)}
-            placeholder="Enter Info"
-          />
-        </div>
-       
-      </InputWrapper>
-      <Button onClick={handleDashBoard}>Add Account</Button>
     </>
   );
 };

@@ -43,7 +43,7 @@ function App() {
             <Link to="/Accounts">Accounts</Link>
           </Tabs>
           <Tabs>
-            <Link to="/DashBoard">DashBoard</Link>
+            <Link to="/Dashboard">Create New Profile</Link>
           </Tabs>
           <Tabs>
             <Link to="/login">Login</Link>
@@ -58,11 +58,11 @@ function App() {
         <Fragment>
           <Routes>
             <Route path="/" element={<DashBoard />} />
-            <Route path="/DashBoard" element={<DashBoard />} />
+            <Route path="/Dashboard" element={<DashBoard />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/Accounts" element={<Accounts />} />
-            <Route path="/AccountProfile/:id" element={<AccountProfile />} />
+            {/* <Route path="/AccountProfile/:id" element={<AccountProfile />} /> */}
 
           </Routes>
         </Fragment>

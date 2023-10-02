@@ -42,7 +42,7 @@ accountRouter
   .post(authenticate.authenticateToken, async (req, res, next) => {
     req.body.userId = req.user.id;
     console.log("req.id", req.user.id);
-    const { companyName, businessType, fleetSize, equipmentType, lookingFor, lastPurchased} =
+    const { companyName, businessType, fleetSize, equipmentType, lookingFor, lastPurchased, firstName, lastName, email, phoneNumber, address, address2, state, city, zipCode, notes} =
       req.body;
 
       Account.create({
@@ -51,7 +51,17 @@ accountRouter
         fleetSize: fleetSize,
         equipmentType: equipmentType,
         lookingFor: lookingFor,
-        lastPurchased: new Date(lastPurchased)
+        lastPurchased: new Date(lastPurchased),
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+        address: address,
+        address2: address2,
+        state: state,
+        city: city,
+        zipCode: zipCode,
+        notes: notes
       }).then((response) => {
         res.json(response)
       })
