@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Profile from "./test";
+import Profile from "./Profile";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Wrapper = styled.div`
   border: solid black 10px;
@@ -43,49 +45,105 @@ const InputWrapper = styled.div`
 
 
 const DashBoard = () => {
-  const [companyName, setCompanyName] = useState("");
-  const [businessType, setBusinessType] = useState("");
-  const [fleetSize, setFleetSize] = useState("");
-  const [lastPurchased, setLastPurchased] = useState("");
-  const [lookingFor, setLookingFor] = useState("");
-  const [equipmentType, setEquipmentType] = useState("");
-
+  // const [companyName, setCompanyName] = useState("");
+  // const [businessType, setBusinessType] = useState("");
+  // const [fleetSize, setFleetSize] = useState("");
+  // const [lastPurchased, setLastPurchased] = useState("");
+  // const [lookingFor, setLookingFor] = useState("");
+  // const [equipmentType, setEquipmentType] = useState("");
+const [bread, showToast] = useState(false)
   const [addressInfo, setAddressInfo] = useState({
+    companyName: "",
     firstName: "",
     lastName: "",
+    businessType: "",
+    equipmentType: "",
+    fleetSize: 1,
+    lookingFor: "",
     email: "",
     phoneNumber: "",
     address: "",
     address2: "",
     city: "",
-    zipCode: "",
+    state: "",
+    zipCode: 0,
   });
 
+  useEffect(() => {
+    toast("Company Added!")
+  }, [])
+  
+
   const handleChange = (e) => {
+    console.log(addressInfo, e.target.name)
     switch (e.target.name) {
       case "firstName":
-        setAddressInfo({ ...addressInfo, firstName: e.target.value });
+        setAddressInfo((pre) => ({...pre,  firstName: e.target.value }))
         break;
       case "lastName":
-        setAddressInfo({ ...addressInfo, lastName: e.target.value });
+        setAddressInfo((pre) => 
+          ({...pre,  lastName: e.target.value })
+        )
         break;
+        case "companyName":
+          setAddressInfo((pre) => 
+            ({...pre,  companyName: e.target.value })
+          )
+          break;
+        case "equipmentType":
+          setAddressInfo((pre) => 
+            ({...pre,  equipmentType: e.target.value })
+          )
+          break;
       case "email":
-        setAddressInfo({ ...addressInfo, email: e.target.value });
+        setAddressInfo((pre) => 
+          ({...pre,  email: e.target.value })
+        )
         break;
+        case "businessType":
+          setAddressInfo((pre) => 
+            ({...pre,  businessType: e.target.value })
+          )
+          break;
+          case "lookingFor":
+            setAddressInfo((pre) => 
+              ({...pre,  lookingFor: e.target.value })
+            )
+            break;
+            case "fleetSize":
+              setAddressInfo((pre) => 
+                ({...pre,  fleetSize: e.target.value })
+              )
+              break;
       case "phoneNumber":
-        setAddressInfo({ ...addressInfo, phoneNumber: e.target.value });
+        setAddressInfo((pre) => 
+          ({...pre,  phoneNumber: e.target.value })
+        )
         break;
       case "address":
-        setAddressInfo({ ...addressInfo, address: e.target.value });
+        setAddressInfo((pre) => 
+          ({...pre,  address: e.target.value })
+        )
         break;
       case "address2":
-        setAddressInfo({ ...addressInfo, address2: e.target.value });
+        setAddressInfo((pre) => 
+          ({...pre,  address2: e.target.value })
+        )
         break;
       case "city":
-        setAddressInfo({ ...addressInfo, city: e.target.value });
+        setAddressInfo((pre) => 
+          ({...pre,  city: e.target.value })
+        )
+        break;
+        case "state":
+          setAddressInfo((pre) => 
+            ({...pre,  state: e.target.value })
+          )
         break;
       case "zipCode":
-        setAddressInfo({ ...addressInfo, zipCode: e.target.value });
+        setAddressInfo((pre) => 
+          ({...pre,  zipCode: e.target.value })
+      )
         break;
       default:
         break;
@@ -94,7 +152,27 @@ const DashBoard = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
+    console.log(addressInfo, 'in here')
+    fetch('http://localhost:3002/accounts', {
+      method:'Post',
+      headers:{
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jsonwebtoken')}`
+      },
+      body: JSON.stringify(addressInfo)
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((results) => {
+      showToast(true)
+      
+      console.log(results)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
 
 //   const handleDashBoard = async () => {
@@ -149,11 +227,16 @@ const DashBoard = () => {
 
   return (
     <>
+    {bread && <ToastContainer />}
        <Profile
             handleSubmit={handleSubmit}
             firstName={addressInfo.firstName}
             handleChange={handleChange}
             lastName={addressInfo.lastName}
+            equipmentType={addressInfo.equipmentType}
+            companyName={addressInfo.companyName}
+            fleetSize={addressInfo.fleetSize}
+            lookingFor={addressInfo.lookingFor}
             email={addressInfo.email}
             phoneNumber={addressInfo.phoneNumber}
             address={addressInfo.address}

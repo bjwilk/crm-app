@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Profile from "./test";
+import Profile from "./Profile";
 
 export default function AccountProfile() {
   const { id } = useParams();

@@ -30,11 +30,6 @@ Account.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    lookingFor: {
-      // type: DataTypes.ARRAY(DataTypes.STRING),
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     lastPurchased: {
       type: DataTypes.DATE,
       allowNull: true,

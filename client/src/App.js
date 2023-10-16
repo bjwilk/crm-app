@@ -43,7 +43,7 @@ function App() {
             <Link to="/Accounts">Accounts</Link>
           </Tabs>
           <Tabs>
-            <Link to="/Dashboard">Create New Profile</Link>
+            <Link to="/Dashboard">Create New Company</Link>
           </Tabs>
           <Tabs>
             <Link to="/login">Login</Link>

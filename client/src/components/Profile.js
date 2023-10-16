@@ -1,6 +1,7 @@
 import React from "react";
 
 const Profile = (props) => {
+  
 
   return (
     <div className="container-fluid">
@@ -9,10 +10,10 @@ const Profile = (props) => {
           <h2 className="h5 mb-3 mb-lg-0">Create new customer</h2>
           <div className="hstack gap-3">
             <button className="btn btn-light btn-sm btn-icon-text">
-              <i className="bi bi-x"></i> <span className="text">Cancel</span>
+              <span className="text">Cancel</span>
             </button>
             <button onClick={props.handleSubmit} className="btn btn-primary btn-sm btn-icon-text">
-              <i className="bi bi-save"></i> <span className="text">Save</span>
+               <span className="text">Save</span>
             </button>
           </div>
         </div>
@@ -114,7 +115,7 @@ const Profile = (props) => {
             {/* <!-- Basic information --> */}
             <div className="card mb-4">
               <div className="card-body">
-                <h3 className="h6 mb-4">Basic information</h3>
+                <h3 className="h6 mb-4">Contact information</h3>
                 <div className="row">
                   <div className="col-lg-6">
                     <div className="mb-3">
@@ -195,68 +196,15 @@ const Profile = (props) => {
                 </div>
                 <div className="row">
                   <div className="col-lg-6">
-                    {/* <div className="mb-3">
-                    <label className="form-label">Country</label>
-                    <select
-                    name='firstName' value={props.firstName} onChange={props.handleChange} 
-                      className="select2 form-control select2-hidden-accessible"
-                      data-select2-placeholder="Select country"
-                      data-select2-id="select2-data-1-gy14"
-                      tabindex="-1"
-                      aria-hidden="true"
-                    >
-                      <option data-select2-id="select2-data-3-ibs9"></option>
-                      <option value="AF">Afghanistan</option>
-                      <option value="BS">Bahamas</option>
-                      <option value="KH">Cambodia</option>
-                      <option value="DK">Denmark</option>
-                      <option value="TL">East Timor</option>
-                      <option value="GM">Gambia</option>
-                    </select>
-                    <span
-                      className="select2 select2-container select2-container--bootstrap-5"
-                      dir="ltr"
-                      data-select2-id="select2-data-2-46y9"
-                      style="width: 391px;"
-                    >
-                      <span className="selection">
-                        <span
-                          className="select2-selection select2-selection--single"
-                          role="combobox"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          tabindex="0"
-                          aria-disabled="false"
-                          aria-labelledby="select2-vp8l-container"
-                          aria-controls="select2-vp8l-container"
-                        >
-                          <span
-                            className="select2-selection__rendered"
-                            id="select2-vp8l-container"
-                            role="textbox"
-                            aria-readonly="true"
-                            title="Select country"
-                          >
-                            <span className="select2-selection__placeholder">
-                              Select country
-                            </span>
-                          </span>
-                          <span
-                            className="select2-selection__arrow"
-                            role="presentation"
-                          >
-                            <b role="presentation"></b>
-                          </span>
-                        </span>
-                      </span>
-                      <span className="dropdown-wrapper" aria-hidden="true"></span>
-                    </span>
-                  </div> */}
+             
                   </div>
                   <div className="col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">State</label>
                       <select
+                      onChange={props.handleChange}
+                      value={props.state}
+                      name="state"
                         className="select2 form-control select2-hidden-accessible"
                         data-select2-placeholder="Select state"
                         data-select2-id="select2-data-4-680y"
@@ -380,8 +328,8 @@ const Profile = (props) => {
                     <div className="mb-3">
                       <label className="form-label">ZIP code</label>
                       <input
-                        name="zipcode"
-                        value={props.zipcode}
+                        name="zipCode"
+                        value={props.zipCode}
                         onChange={props.handleChange}
                         type="number"
                         className="form-control"
