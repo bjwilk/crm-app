@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AccountContext } from "../App";
 
-function FilterAccounts() {
+function FilterAccounts({dataEquipment}) {
     const [account, setAccount] = useContext(AccountContext)
 
   const [equipmentType, setequipmentType] = useState([]);
   const [equipment, setEquipment] = useState("")
 
   const fetchAccounts = async (equipment) => {
+    
     try {
       const response = await fetch(`http://localhost:3002/accounts/equipmentType/${equipment}`, {
         method: "GET",
@@ -19,7 +20,6 @@ function FilterAccounts() {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      console.log(data);
       setAccount(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -37,16 +37,15 @@ function FilterAccounts() {
         return res.json();
       })
       .then((equipment) => {
-        console.log(equipment);
         setequipmentType(equipment);
       });
   };
   useEffect(() => {
     fetchEquipment();
+    console.log(dataEquipment)
   }, []);
 
 const handleSelect = (e) => {
-    console.log(e.target.value, "value")
     fetchAccounts(e.target.value)
 
 }
@@ -56,7 +55,7 @@ const handleSelect = (e) => {
       <h3>Search by Equipment Type</h3>
       <select className="form-select" aria-label="Default select example" value={equipment} onChange={handleSelect}>
         <option selected>Open this select menu</option>
-        <option value="Dump Truck">Dump Truck</option>
+        <option value="Dump Trucks">Dump Truck</option>
         <option value="Flatbed">Flatbed</option>
         <option value="Water Truck">Water Truck</option>
         <option value="Box Truck">Box Truck</option>
@@ -64,6 +63,7 @@ const handleSelect = (e) => {
         <option value="Sleeper">Sleeper</option>
         <option value="Service Truck">Service Truck</option>
       </select>
+     
     </div>
   );
 }

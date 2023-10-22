@@ -82,7 +82,7 @@ export default function AccountProfile() {
       {account && (
         <div>
           {account.companyName} {account.businessType}
-          {/* <Profile
+          <Profile
             handleSubmit={handleSubmit}
             firstName={addressInfo.firstName}
             handleChange={handleChange}
@@ -93,7 +93,7 @@ export default function AccountProfile() {
             address2={addressInfo.address2}
             city={addressInfo.city}
             zipCode={addressInfo.zipCode}
-          /> */}
+          />
         </div>
       )}
     </div>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import FilterAccounts from "./FilterAccounts";
 import { AccountContext } from "../App";
+// import AccountProfile from "./AccountProfile";
 
 // Now you can use the `Account` model to create, query, and manipulate data.
 
