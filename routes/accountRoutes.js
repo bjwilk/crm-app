@@ -152,6 +152,24 @@ accountRouter
       .catch((err) => next(err));
   });
 
+  accountRouter
+  .route("/businessType/:business")
+  .get(authenticate.authenticateToken, (req, res) => {
+    console.log(req.params.business, 'business type')
+    const {business} = req.params
+    Account.findAll({
+      where:{
+        businessType: req.params.business
+      }
+    })
+      .then((business) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(business);
+      })
+      .catch((err) => next(err));
+  });
+
 
 
 module.exports = accountRouter;
