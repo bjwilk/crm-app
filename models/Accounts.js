@@ -25,6 +25,11 @@ Account.init(
       type: DataTypes.INTEGER,
       allowNull: true, // allowNull defaults to true, so you can omit this line
     },
+    LookingFor: {
+      // type: DataTypes.ARRAY(DataTypes.STRING), // Use ARRAY for array types
+      type: DataTypes.STRING,
+      allowNull: true, // allowNull defaults to true, so you can omit this line
+    },
     equipmentType: {
       // type: DataTypes.ARRAY(DataTypes.STRING),
       type: DataTypes.STRING,

@@ -170,6 +170,40 @@ accountRouter
       .catch((err) => next(err));
   });
 
+  accountRouter
+  .route("/companyName/:companyName")
+  .get(authenticate.authenticateToken, (req, res) => {
+    console.log(req.params.companyName, 'companyName type')
+    const {companyName} = req.params
+    Account.findAll({
+      where:{
+        companyName: req.params.companyName
+      }
+    })
+      .then((companyName) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(companyName);
+      })
+      .catch((err) => next(err));
+  });
 
+  accountRouter
+  .route("/lookingFor/:lookingFor")
+  .get(authenticate.authenticateToken, (req, res) => {
+    console.log(req.params.lookingFor, 'lookingFor type')
+    const {lookingFor} = req.params
+    Account.findAll({
+      where:{
+        lookingFor: req.params.lookingFor
+      }
+    })
+      .then((lookingFor) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(lookingFor);
+      })
+      .catch((err) => next(err));
+  });
 
 module.exports = accountRouter;

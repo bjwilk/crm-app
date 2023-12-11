@@ -55,13 +55,14 @@ export default function Accounts() {
             account.map((item) => (
               <div key={item.id}>
                 <Link to={`/AccountProfile/${item.id}`}>
+                  
                   {item.companyName}
                 </Link>
               </div>
             ))}
         </div>
       </div>
-      {account.length > 0 && <FilterAccounts dataEquipment={account}/>}
+      {account.length > 0 ? <FilterAccounts dataEquipment={account}/>: <FilterAccounts />}
     </div>
   );
 }

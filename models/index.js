@@ -7,7 +7,7 @@ User.hasOne(Account, {
     }
 })
 Account.belongsTo(User)
-
+Account.sync()
 const syncTable = async () => {
     await sequelize.sync({force: false});
     console.log("Tables Synched!!")
@@ -18,3 +18,6 @@ module.exports = {
     Account,
     User
 }
+
+
+// mysql -u root -p crmdb ./seeds3.sql
