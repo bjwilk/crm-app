@@ -9,7 +9,7 @@ accountRouter
   .get( (req, res) => {
     // let id = req.user.id;
     // console.log("id:", req.user.id);
-    Account.findByPk(1)
+    Account.find()
       .then((accounts) => {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");

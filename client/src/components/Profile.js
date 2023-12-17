@@ -64,27 +64,77 @@ const Profile = (props) => {
                     </div>
                   </div>
                   <div className="col-lg-6">
-                    <div className="mb-3">
-                      <label className="form-label">Equipment Type</label>
-                      <select
-                    name='equipmentType' value={props.equipmentType} onChange={props.handleChange} 
-                      className="select2 form-control select2-hidden-accessible"
-                      data-select2-placeholder="Select country"
-                      data-select2-id="select2-data-1-gy14"
-                      tabindex="-1"
-                      aria-hidden="true"
-                    >
-                      <option data-select2-id="select2-data-3-ibs9"></option>
-                      <option value="Dump Trucks">Dump Trucks</option>
-                      <option value="Flatbeds">Flatbeds</option>
-                      <option value="Water Trucks">Water Trucks</option>
-                      <option value="Box Vans">Box Vans</option>
-                      <option value="Day Cabs">Day Cabs</option>
-                      <option value="Sleepers">Sleepers</option>
-                    </select>
-
-                    </div>
-                  </div>
+  <div className="mb-3">
+    <label className="form-label">Equipment Type</label>
+    <div>
+      <label>
+        <input
+          type="checkbox"
+          name="equipmentType"
+          value="Dump Trucks"
+          checked={props.equipmentType.includes("Dump Trucks")}
+          onChange={props.handleChange}
+        />
+        Dump Trucks
+      </label>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          name="equipmentType"
+          value="Flatbeds"
+          checked={props.equipmentType.includes("Flatbeds")}
+          onChange={props.handleChange}
+        />
+        Flatbeds
+      </label>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          name="equipmentType"
+          value="Water Trucks"
+          checked={props.equipmentType.includes("Water Trucks")}
+          onChange={props.handleChange}
+        />
+        Water Trucks
+      </label>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          name="equipmentType"
+          value="Box Vans"
+          checked={props.equipmentType.includes("Box Vans")}
+          onChange={props.handleChange}
+        />
+        Box Vans
+      </label>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          name="equipmentType"
+          value="Day Cabs"
+          checked={props.equipmentType.includes("Day Cabs")}
+          onChange={props.handleChange}
+        />
+        Day Cabs
+      </label>
+      <br />
+      <label>
+        <input
+          type="checkbox"
+          name="equipmentType"
+          value="Sleepers"
+          checked={props.equipmentType.includes("Sleepers")}
+          onChange={props.handleChange}
+        />
+        Sleepers
+      </label>
+    </div>
+  </div>
+</div>
                   <div className="col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Looking For</label>
